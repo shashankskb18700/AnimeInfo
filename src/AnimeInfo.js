@@ -6,7 +6,9 @@ class AnimeInfo extends React.Component{
   constructor(props) {
     super(props);
     this.state= {
-      data:[]
+      data: [],
+      term:""
+      
     }
     
   }
@@ -14,7 +16,7 @@ class AnimeInfo extends React.Component{
   async componentDidMount() {
    
       const apiData = await axios.get(
-        "https://api.jikan.moe/v3/search/anime?q=attackontitan"
+        "https://api.jikan.moe/v3/search/anime?q=tokyoghoul"
         
       );
     console.log(apiData.data.results)
@@ -26,13 +28,19 @@ class AnimeInfo extends React.Component{
   render() {
     
     return (
-      
       <div>
-        news news news
-        <AnimeRender detail={this.state}/>
-         {console.log(this.state)}
+        <form >
+          <input type="text"
+            value={this.state.term}
+            // onChange={e => this.setState((this.state.term, e.target.value))} 
+            
+            />
+        </form>
+
+        <AnimeRender detail={this.state} />
+        {console.log(this.state)}
       </div>
-    )
+    );
   }
   
 }
