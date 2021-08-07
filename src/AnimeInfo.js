@@ -1,38 +1,43 @@
 import React from 'react';
 import axios from 'axios';
 import AnimeRender from './AnimeRender';
+import './AnimeInfo.css';
 
-class AnimeInfo extends React.Component{
+class AnimeInfo extends React.Component {
   constructor(props) {
     super(props);
-    this.state= {
+    this.state = {
       data: [],
-      term:""
+      term: ""
       
     }
     
   }
   
-  async componentDidMount() {
+  async componentDidUpdate() {
    
-      const apiData = await axios.get(
-        "https://api.jikan.moe/v3/search/anime?q=tokyoghoul"
-        
-      );
+    const apiData = await axios.get(`https://api.jikan.moe/v3/search/anime?q=${this.state.term}`);
     console.log(apiData.data.results)
-    this.setState((this.state.data ,apiData.data));
+    this.setState({ data: apiData.data });
+    
+  }
+  setTerm = (e) => {
+      
+    this.setState({term:e.target.value})
     
   }
 
 
   render() {
-    
+    console.log(this.state.data)
     return (
       <div>
-        <form >
+        <form onSubmit={this.setTerm} className='inpu'>
           <input type="text"
+            
+            placeholder="search"
             value={this.state.term}
-            // onChange={e => this.setState((this.state.term, e.target.value))} 
+            onChange={this.setTerm} 
             
             />
         </form>
