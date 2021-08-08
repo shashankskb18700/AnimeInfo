@@ -5,3 +5,11 @@
   justify-content: center;
   
 }
+input{
+  width: 40%;
+  padding: 12px;
+  background-color: lightgrey;
+  border:lightblue;
+  outline: none;
+  border-radius: 5px;
+}
