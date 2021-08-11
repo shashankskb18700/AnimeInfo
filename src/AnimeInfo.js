@@ -19,13 +19,13 @@ class AnimeInfo extends React.Component {
      
     const data = async() => {
       const apiData = await axios.get(`https://api.jikan.moe/v3/search/anime?q=${this.state.term}`);
-      console.log(apiData.config.url)
-      console.log(apiData);
+      
       if (this.state.url !== apiData.config.url) {
         
         this.setState({ data: apiData.data }); 
-        }
-      // this.setState({ data: apiData.data }); 
+      }
+     
+      
       
     }
     
@@ -50,19 +50,13 @@ class AnimeInfo extends React.Component {
     let ur= `https://api.jikan.moe/v3/search/anime?q=${e.target.value}`
     this.setState({ term: e.target.value });
     this.setState({ url: ur });
-    // const timeStamp = setTimeout((e)=>{
-      
-    //   this.setState({term:e.target.value})
-    // }, 2000)
-    // return () => {
-    //   clearTimeout(timeStamp);
-    // }
+   
     
   }
 
 
   render() {
-    console.log(this.state.term)
+    
     return (
       <div className="inpu">
           
@@ -74,8 +68,8 @@ class AnimeInfo extends React.Component {
           />
        
 
-        <AnimeRender detail={this.state} />
-        {console.log(this.state)}
+        <AnimeRender detail={this.state.data} />
+      
       </div>
     );
   }
