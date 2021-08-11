@@ -15,14 +15,17 @@ class AnimeInfo extends React.Component {
     
   }
   
-  componentDidMount() {
+  componentDidUpdate() {
      
     const data = async() => {
       const apiData = await axios.get(`https://api.jikan.moe/v3/search/anime?q=${this.state.term}`);
       console.log(apiData.config.url)
-      
+      console.log(apiData);
+      if (this.state.url !== apiData.config.url) {
         
         this.setState({ data: apiData.data }); 
+        }
+      // this.setState({ data: apiData.data }); 
       
     }
     
@@ -44,8 +47,9 @@ class AnimeInfo extends React.Component {
 
   setTerm = (e) => {
    
-    
-     this.setState({ term: e.target.value });
+    let ur= `https://api.jikan.moe/v3/search/anime?q=${e.target.value}`
+    this.setState({ term: e.target.value });
+    this.setState({ url: ur });
     // const timeStamp = setTimeout((e)=>{
       
     //   this.setState({term:e.target.value})
